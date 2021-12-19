@@ -1,14 +1,14 @@
-import { Card } from './deck'
+import { Card, Suit } from './deck'
 import { fstWins } from './ranking'
 
 describe('ranking', () => {
     it('Rocket trumps non-Rockets', () => {
         const rocket: Card = {
-            suit: 'Rocket',
+            suit: Suit.Rocket,
             value: 1,
         }
         const other: Card = {
-            suit: 'Cross',
+            suit: Suit.Cross,
             value: 9,
         }
 
@@ -17,11 +17,11 @@ describe('ranking', () => {
     })
     it('Rocket ranked by Value', () => {
         const rocket4: Card = {
-            suit: 'Rocket',
+            suit: Suit.Rocket,
             value: 4,
         }
         const rocket3: Card = {
-            suit: 'Rocket',
+            suit: Suit.Rocket,
             value: 3,
         }
 
@@ -30,11 +30,11 @@ describe('ranking', () => {
     })
     it('given second card not same suit as first, first wins', () => {
         const first: Card = {
-            suit: 'Triangle',
+            suit: Suit.Triangle,
             value: 1,
         }
         const second: Card = {
-            suit: 'Circle',
+            suit: Suit.Circle,
             value: 9,
         }
 
@@ -42,11 +42,11 @@ describe('ranking', () => {
     })
     it('given cards are the same suit, highest rank wins', () => {
         const first: Card = {
-            suit: 'Circle',
+            suit: Suit.Circle,
             value: 9,
         }
         const second: Card = {
-            suit: 'Circle',
+            suit: Suit.Circle,
             value: 8,
         }
 

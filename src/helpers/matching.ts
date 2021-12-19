@@ -1,7 +1,7 @@
 import { Card } from '../deck'
 
 export function totalMatchingCards(
-    haystack: Card[],
+    haystack: Set<Card>,
     needle: Card,
     matchPredicate: (a: Card, b: Card) => boolean
 ): number {
@@ -9,11 +9,11 @@ export function totalMatchingCards(
 }
 
 function matchingCards(
-    haystack: Card[],
+    haystack: Set<Card>,
     needle: Card,
     matchPredicate: (a: Card, b: Card) => boolean
 ) {
-    return haystack.filter((c) => matchPredicate(c, needle))
+    return [...haystack].filter((c) => matchPredicate(c, needle))
 }
 
 export function isSameCard(c1: Card, c2: Card): boolean {

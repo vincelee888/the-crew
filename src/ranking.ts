@@ -1,8 +1,8 @@
-import { Card } from './deck'
+import { Card, Suit } from './deck'
 import { isSameSuit } from './helpers/matching'
 
 const firstCardIsTrump = (card1: Card, card2: Card) =>
-    card1.suit === 'Rocket' && card2.suit !== 'Rocket'
+    card1.suit === Suit.Rocket && card2.suit !== Suit.Rocket
 const secondCardIsTrump = (card1: Card, card2: Card) =>
     firstCardIsTrump(card2, card1)
 const areNotSameSuit = (card1: Card, card2: Card) => !isSameSuit(card1, card2)
