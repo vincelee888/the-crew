@@ -1,20 +1,20 @@
 export enum Suit {
-    Rocket,
-    Square,
-    Triangle,
-    Circle,
-    Cross,
+    Rocket = 'Rocket',
+    Square = 'Square',
+    Triangle = 'Triangle',
+    Circle = 'Circle',
+    Cross = 'Cross',
 }
 export enum Value {
-    One,
-    Two,
-    Three,
-    Four,
-    Five,
-    Six,
-    Seven,
-    Eight,
-    Nine,
+    One = '1',
+    Two = '2',
+    Three = '3',
+    Four = '4',
+    Five = '5',
+    Six = '6',
+    Seven = '7',
+    Eight = '8',
+    Nine = '9',
 }
 
 export type Card = {
@@ -23,13 +23,16 @@ export type Card = {
 }
 
 export const getDeck = () => {
-    const rockets = range(1, 4).map(
-        (v) => ({ suit: Suit.Rocket, value: v } as Card)
-    )
-    const others: Card[] = []
-
-    return new Set([...rockets, ...others])
+    const cards: Card[] = []
+    for (const s in Suit) {
+        for (const v in Value) {
+            cards.push({ suit: (<any>Suit)[s], value: (<any>Value)[v] })
+        }
+    }
+    return new Set([...cards.filter(isValidCard)])
 }
 
-const range = (start: number, end: number) =>
-    new Array(end - start + 1).fill(true).map((_, i) => i + start)
+function isValidCard(c: Card) {
+    const isLessThanFive = c.value < Value.Five
+    return c.suit !== Suit.Rocket || (c.suit === Suit.Rocket && isLessThanFive)
+}

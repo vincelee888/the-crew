@@ -1,15 +1,15 @@
-import { Card, Suit } from './deck'
+import { Card, Suit, Value } from './deck'
 import { fstWins } from './ranking'
 
 describe('ranking', () => {
     it('Rocket trumps non-Rockets', () => {
         const rocket: Card = {
             suit: Suit.Rocket,
-            value: 1,
+            value: Value.One,
         }
         const other: Card = {
             suit: Suit.Cross,
-            value: 9,
+            value: Value.Two,
         }
 
         expect(fstWins(rocket, other)).toBeTruthy()
@@ -18,11 +18,11 @@ describe('ranking', () => {
     it('Rocket ranked by Value', () => {
         const rocket4: Card = {
             suit: Suit.Rocket,
-            value: 4,
+            value: Value.Two,
         }
         const rocket3: Card = {
             suit: Suit.Rocket,
-            value: 3,
+            value: Value.One,
         }
 
         expect(fstWins(rocket4, rocket3)).toBeTruthy()
@@ -31,11 +31,11 @@ describe('ranking', () => {
     it('given second card not same suit as first, first wins', () => {
         const first: Card = {
             suit: Suit.Triangle,
-            value: 1,
+            value: Value.One,
         }
         const second: Card = {
             suit: Suit.Circle,
-            value: 9,
+            value: Value.Nine,
         }
 
         expect(fstWins(first, second)).toBeTruthy()
@@ -43,11 +43,11 @@ describe('ranking', () => {
     it('given cards are the same suit, highest rank wins', () => {
         const first: Card = {
             suit: Suit.Circle,
-            value: 9,
+            value: Value.Nine,
         }
         const second: Card = {
             suit: Suit.Circle,
-            value: 8,
+            value: Value.Eight,
         }
 
         expect(fstWins(first, second)).toBeTruthy()
