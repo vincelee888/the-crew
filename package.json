@@ -6,7 +6,8 @@
     "scripts": {
         "test": "jest",
         "watch": "jest --watch",
-        "pretty": "npx exec prettier -w"
+        "pretty": "npx exec prettier -w",
+        "prepare": "husky install"
     },
     "author": "",
     "license": "ISC",
@@ -17,5 +18,8 @@
         "jest": "^26.0.1",
         "prettier": "^2.2.1",
         "typescript": "^3.9.3"
+    },
+    "dependencies": {
+        "husky": "^7.0.4"
     }
 }
