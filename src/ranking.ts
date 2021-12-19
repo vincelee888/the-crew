@@ -43,5 +43,5 @@ const rules = [
 export function fstWins(card1: Card, card2: Card) {
     const rule = rules.find((r) => r.guard(card1, card2))
 
-    if (rule) return rule?.isFirstCardTheWinner(card1, card2) ?? false
+    return rule?.isFirstCardTheWinner(card1, card2) ?? false
 }
