@@ -1,11 +1,11 @@
 import { Card } from './deck'
+import { isSameSuit } from './helpers/matching'
 
-const areSameSuit = (card1: Card, card2: Card) => card1.suit === card2.suit
 const firstCardIsTrump = (card1: Card, card2: Card) =>
     card1.suit === 'Rocket' && card2.suit !== 'Rocket'
 const secondCardIsTrump = (card1: Card, card2: Card) =>
     firstCardIsTrump(card2, card1)
-const areNotSameSuit = (card1: Card, card2: Card) => !areSameSuit(card1, card2)
+const areNotSameSuit = (card1: Card, card2: Card) => !isSameSuit(card1, card2)
 
 const higherValueWins = (card1: Card, card2: Card) => card1.value > card2.value
 const firstCardWins = (_?: Card, __?: Card) => true
@@ -17,7 +17,7 @@ type Rule = {
 }
 
 const sameSuitsAreRankedByValue: Rule = {
-    guard: areSameSuit,
+    guard: isSameSuit,
     isFirstCardTheWinner: higherValueWins,
 }
 const firstCardTrumpBeatsNoneTrumps: Rule = {
