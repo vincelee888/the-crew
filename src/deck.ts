@@ -6,3 +6,9 @@ export type Card = {
     suit: Suit
     value: Value
 }
+
+export const getDeck = () =>
+    range(1, 4).map((v) => ({ suit: 'Rocket', value: v } as Card))
+
+const range = (start: number, end: number) =>
+    new Array(end - start + 1).fill(true).map((_, i) => i + start)
