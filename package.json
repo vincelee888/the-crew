@@ -1,0 +1,21 @@
+{
+    "name": "ts-checkout",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "watch": "jest --watch",
+        "pretty": "npx exec prettier -w"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/preset-env": "^7.10.0",
+        "@babel/preset-typescript": "^7.9.0",
+        "@types/jest": "^26.0.15",
+        "jest": "^26.0.1",
+        "prettier": "^2.2.1",
+        "typescript": "^3.9.3"
+    }
+}
