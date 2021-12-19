@@ -1,49 +1,36 @@
 import { Card } from './deck'
 
-const areSameSuit = (card1: Card, card2: Card) => {
-    return card1.suit === card2.suit
-}
-const firstCardIsTrump = (card1: Card, card2: Card) => {
-    return card1.suit === 'Rocket' && card2.suit !== 'Rocket'
-}
-const secondCardIsTrump = (card1: Card, card2: Card) => {
-    return firstCardIsTrump(card2, card1)
-}
-const higherValueWins = (card1: Card, card2: Card) => {
-    return card1.value > card2.value
-}
-const firstCardWins = (_?: Card, __?: Card) => {
-    return true
-}
-const firstCardLoses = (_?: Card, __?: Card) => {
-    return false
-}
-const areNotSameSuitAndNotTrump = (card1: Card, card2: Card) => {
-    const sameSuit = areSameSuit(card1, card2)
-    const firstCardTrump = firstCardIsTrump(card1, card2)
-    return !sameSuit && !firstCardTrump
-}
+const areSameSuit = (card1: Card, card2: Card) => card1.suit === card2.suit
+const firstCardIsTrump = (card1: Card, card2: Card) =>
+    card1.suit === 'Rocket' && card2.suit !== 'Rocket'
+const secondCardIsTrump = (card1: Card, card2: Card) =>
+    firstCardIsTrump(card2, card1)
+const areNotSameSuit = (card1: Card, card2: Card) => !areSameSuit(card1, card2)
+
+const higherValueWins = (card1: Card, card2: Card) => card1.value > card2.value
+const firstCardWins = (_?: Card, __?: Card) => true
+const firstCardLoses = (_?: Card, __?: Card) => false
 
 type Rule = {
     guard: (card1: Card, card2: Card) => boolean
-    check: (card1: Card, card2: Card) => boolean
+    isFirstCardTheWinner: (card1: Card, card2: Card) => boolean
 }
 
 const sameSuitsAreRankedByValue: Rule = {
     guard: areSameSuit,
-    check: higherValueWins,
+    isFirstCardTheWinner: higherValueWins,
 }
 const firstCardTrumpBeatsNoneTrumps: Rule = {
     guard: firstCardIsTrump,
-    check: firstCardWins,
+    isFirstCardTheWinner: firstCardWins,
 }
 const firstCardNoneTrumpLosesToTrump: Rule = {
     guard: secondCardIsTrump,
-    check: firstCardLoses,
+    isFirstCardTheWinner: firstCardLoses,
 }
 const firstCardsSuitLeads: Rule = {
-    guard: areNotSameSuitAndNotTrump,
-    check: firstCardWins,
+    guard: areNotSameSuit,
+    isFirstCardTheWinner: firstCardWins,
 }
 
 const rules = [
@@ -56,7 +43,5 @@ const rules = [
 export function fstWins(card1: Card, card2: Card) {
     const rule = rules.find((r) => r.guard(card1, card2))
 
-    if (rule) return rule.check(card1, card2)
-
-    return false
+    if (rule) return rule?.isFirstCardTheWinner(card1, card2) ?? false
 }

@@ -1,3 +1,2 @@
-# Run the tests
-
-`npx jest`
+`npm i`
+`npm run test`
